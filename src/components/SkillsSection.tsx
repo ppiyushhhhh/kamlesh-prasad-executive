@@ -6,7 +6,7 @@ const SkillsSection = () => {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
-  const skills = ["Time Management", "Knowledge Acquisition", "System Maintenance"];
+  const skills = ["Executive Time Management", "Continuous Learning & Upskilling", "Enterprise Systems Governance"];
   const languages = ["Hindi", "English", "Marathi"];
 
   return (

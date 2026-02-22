@@ -44,7 +44,7 @@ const HeroSection = () => {
               transition={{ delay: 0.2 }}
               className="text-hero-muted uppercase tracking-[0.25em] text-sm mb-4 font-medium"
             >
-              Senior IT & Cyber Security Leader
+              Technology Executive · Cyber Security Strategist
             </motion.p>
 
             <motion.h1
@@ -62,7 +62,7 @@ const HeroSection = () => {
               transition={{ delay: 0.4 }}
               className="text-lg md:text-xl text-hero-muted font-light mb-8 max-w-2xl"
             >
-              Head – IT Operations, Infrastructure & Cyber Security
+              Driving Enterprise-Wide IT Strategy, Cyber Resilience & Infrastructure Transformation
             </motion.p>
 
             <motion.div

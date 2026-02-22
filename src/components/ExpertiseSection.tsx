@@ -11,13 +11,13 @@ import {
 } from "lucide-react";
 
 const expertise = [
-  { icon: Server, title: "IT Operations & Infrastructure", desc: "End-to-end management of enterprise IT operations across On-premise, Cloud, SaaS, and Hybrid environments." },
-  { icon: ShieldCheck, title: "Cyber Security & Compliance", desc: "Enterprise security strategy, InfoSec governance, risk management, and regulatory compliance frameworks." },
-  { icon: Cloud, title: "Cloud & Microsoft 365 Architecture", desc: "Technical architecture and migration strategy for Microsoft 365 and cloud-native environments." },
-  { icon: HardDrive, title: "Data Center, DR & Near-DR Planning", desc: "Design, build, and planning of Data Centers, Disaster Recovery, and Near-DR sites for business continuity." },
-  { icon: Network, title: "Network & Perimeter Security", desc: "WAF, Firewall, and Load Balancer deployment for robust network perimeter defense." },
-  { icon: BarChart3, title: "Business Intelligence & Power BI", desc: "Data analytics and Power BI implementations to drive data-informed decision making." },
-  { icon: Users, title: "Tech Hiring & Capacity Planning", desc: "Strategic workforce planning, technical recruitment, and team scaling for IT organizations." },
+  { icon: Server, title: "Enterprise IT Operations", desc: "End-to-end ownership of mission-critical IT operations across on-premise, cloud, SaaS, and hybrid environments — ensuring availability, performance, and business continuity." },
+  { icon: ShieldCheck, title: "Cyber Security Governance", desc: "Establishing enterprise security posture, InfoSec governance frameworks, risk quantification, and regulatory compliance aligned with board-level expectations." },
+  { icon: Cloud, title: "Cloud Strategy & Architecture", desc: "Defining cloud-first strategies and leading large-scale Microsoft 365 and hybrid cloud migrations that accelerate digital agility." },
+  { icon: HardDrive, title: "Data Center & BC/DR Strategy", desc: "Strategic planning, design, and commissioning of Data Centers, Disaster Recovery, and Near-DR facilities ensuring zero-downtime resilience." },
+  { icon: Network, title: "Network & Perimeter Defense", desc: "Architecting multi-layered network security — WAF, next-gen firewalls, load balancers — to safeguard enterprise perimeters at scale." },
+  { icon: BarChart3, title: "Data Analytics & BI", desc: "Leveraging Power BI and business intelligence platforms to deliver actionable insights that inform executive decision-making." },
+  { icon: Users, title: "IT Workforce Strategy", desc: "Building and scaling high-performance technology teams through strategic hiring, capability development, and capacity planning." },
 ];
 
 const ExpertiseSection = () => {

@@ -25,10 +25,10 @@ const companies: Company[] = [
         duration: "Oct 2025 – Present",
         location: "Mumbai, Maharashtra",
         highlights: [
-          "Heads Technology and Cyber Security for the organization across all sites",
-          "Oversees IT Operations & Infrastructure spanning On-premises, Cloud, SaaS, and Hybrid environments",
-          "Drives IT Security, Compliance, Governance, and Risk Management strategy",
-          "Leads IT Projects, Technology Migration, and M&A Integrations",
+          "Executive ownership of technology strategy, cyber security, and IT governance across all business verticals",
+          "Directs enterprise IT operations spanning on-premise, cloud, SaaS, and hybrid infrastructure",
+          "Shapes organization-wide security posture, compliance frameworks, and risk mitigation strategies",
+          "Spearheads technology due diligence, M&A integrations, and digital transformation initiatives",
         ],
       },
       {
@@ -36,9 +36,9 @@ const companies: Company[] = [
         duration: "Apr 2023 – Sep 2025",
         location: "Mumbai, Maharashtra",
         highlights: [
-          "Led IT Operations, IT Infrastructure (On-premise, Cloud, SaaS, Hybrid) & Cyber Security",
-          "Solution designer for new acquisitions and projects",
-          "Led Technology Group and InfoSec compliance for the organization",
+          "Led enterprise IT operations and cyber security across multi-site, multi-cloud environments",
+          "Architected technology solutions for new acquisitions and strategic growth initiatives",
+          "Drove InfoSec compliance and governance across the organization",
         ],
       },
       {
@@ -46,9 +46,9 @@ const companies: Company[] = [
         duration: "Apr 2021 – Mar 2023",
         location: "Mumbai, Maharashtra",
         highlights: [
-          "Headed IT Operations, IT Infrastructure and Cyber Security",
-          "Architected Data Center, DR, and Near-DR environments",
-          "Deployed Network & Perimeter Security – WAF, Firewall, Load Balancer",
+          "Directed IT operations, infrastructure modernization, and cyber security programs",
+          "Designed and commissioned Data Center, DR, and Near-DR environments for business resilience",
+          "Deployed enterprise-grade network and perimeter security — WAF, next-gen firewalls, load balancers",
         ],
       },
       {
@@ -56,9 +56,9 @@ const companies: Company[] = [
         duration: "Dec 2017 – Mar 2021",
         location: "Mumbai, Maharashtra",
         highlights: [
-          "Managed enterprise IT operations across multiple retail sites",
-          "Implemented Business Intelligence & Power BI solutions",
-          "Drove Microsoft 365 & Cloud environment architecture",
+          "Managed enterprise IT operations across a distributed retail portfolio",
+          "Implemented business intelligence and Power BI platforms for data-driven decision-making",
+          "Architected Microsoft 365 and cloud environment strategy",
         ],
       },
     ],
@@ -71,9 +71,9 @@ const companies: Company[] = [
         duration: "Nov 2015 – Dec 2017",
         location: "Mumbai",
         highlights: [
-          "Managed IT Infrastructure for the E-Commerce business unit",
-          "Designed scalable infrastructure to support rapid business growth",
-          "Ensured high availability and security for e-commerce platforms",
+          "Owned IT infrastructure strategy for a high-growth e-commerce business unit",
+          "Engineered scalable, resilient infrastructure to support rapid business expansion",
+          "Ensured platform availability, performance, and security at scale",
         ],
       },
     ],
@@ -86,9 +86,9 @@ const companies: Company[] = [
         duration: "Sep 2014 – Nov 2015",
         location: "India",
         highlights: [
-          "Led IT Infrastructure Delivery for PAN India Strategic Outsource Deal",
-          "Managed end-to-end infrastructure consulting engagements",
-          "Drove process optimization and service delivery improvements",
+          "Led IT infrastructure delivery for a pan-India strategic outsourcing engagement",
+          "Managed end-to-end infrastructure consulting across enterprise clients",
+          "Drove operational excellence and service delivery optimization",
         ],
       },
     ],
@@ -102,9 +102,9 @@ const companies: Company[] = [
         duration: "Jun 2008 – Sep 2014",
         location: "India",
         highlights: [
-          "Strategic Planning and Technical Architecture",
-          "Contract Management and People Management",
-          "Led server operations for enterprise clients",
+          "Drove strategic planning, technical architecture, and service delivery for enterprise accounts",
+          "Managed contracts, SLAs, and cross-functional teams at scale",
+          "Led mission-critical server operations for marquee enterprise clients",
         ],
       },
       {
