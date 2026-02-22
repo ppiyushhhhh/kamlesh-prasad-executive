@@ -1,0 +1,70 @@
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
+import { Lightbulb, Globe } from "lucide-react";
+
+const SkillsSection = () => {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+
+  const skills = ["Time Management", "Knowledge Acquisition", "System Maintenance"];
+  const languages = ["Hindi", "English", "Marathi"];
+
+  return (
+    <section id="skills" className="section-padding bg-section-alt">
+      <div className="container mx-auto max-w-5xl" ref={ref}>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+        >
+          <p className="text-accent uppercase tracking-[0.2em] text-sm font-medium mb-3">Competencies</p>
+          <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-10">
+            Skills & Languages
+          </h2>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.1 }}
+            className="bg-card border border-border rounded-lg p-6"
+          >
+            <div className="flex items-center gap-3 mb-5">
+              <Lightbulb className="text-gold" size={22} />
+              <h3 className="text-lg font-semibold text-foreground">Skills</h3>
+            </div>
+            <div className="flex flex-wrap gap-3">
+              {skills.map((s) => (
+                <span key={s} className="px-4 py-2 bg-muted rounded-md text-sm font-medium text-foreground">
+                  {s}
+                </span>
+              ))}
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.2 }}
+            className="bg-card border border-border rounded-lg p-6"
+          >
+            <div className="flex items-center gap-3 mb-5">
+              <Globe className="text-accent" size={22} />
+              <h3 className="text-lg font-semibold text-foreground">Languages</h3>
+            </div>
+            <div className="flex flex-wrap gap-3">
+              {languages.map((l) => (
+                <span key={l} className="px-4 py-2 bg-muted rounded-md text-sm font-medium text-foreground">
+                  {l}
+                </span>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default SkillsSection;
