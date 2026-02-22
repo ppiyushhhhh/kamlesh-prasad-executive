@@ -8,10 +8,10 @@ const ProfileSection = () => {
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   const highlights = [
-    { icon: Shield, label: "Enterprise Security & Compliance" },
-    { icon: Server, label: "Large-Scale IT Operations" },
-    { icon: Building2, label: "Retail, Real Estate & E-Commerce" },
-    { icon: Rocket, label: "Digital Transformation Programs" },
+    { icon: Shield, label: "Cyber Security & Risk Governance" },
+    { icon: Server, label: "Enterprise Infrastructure at Scale" },
+    { icon: Building2, label: "Multi-Industry Domain Expertise" },
+    { icon: Rocket, label: "Strategic Transformation & M&A" },
   ];
 
   return (
@@ -28,16 +28,17 @@ const ProfileSection = () => {
           </h2>
 
           <p className="text-muted-foreground text-lg leading-relaxed mb-6">
-            A seasoned IT leader with over two decades of experience steering enterprise-grade technology, 
-            cyber security, and infrastructure transformation across Retail, Real Estate, E-Commerce, and 
-            Consulting domains. Currently serving as General Manager – IT Operations, Infrastructure & Cyber 
-            Security at Nexus Malls, one of India's premier retail real estate platforms.
+            A transformational technology executive with 20+ years of progressive leadership in enterprise 
+            IT strategy, cyber security governance, and large-scale infrastructure modernization. Currently 
+            serving as General Manager – IT Operations, Infrastructure & Cyber Security at Nexus Malls, 
+            steering the technology vision for one of India's premier retail real estate platforms.
           </p>
           <p className="text-muted-foreground text-lg leading-relaxed mb-10">
-            Recognized for building resilient IT ecosystems, establishing governance and compliance frameworks, 
-            leading M&A technology integrations, and architecting cloud-hybrid environments at scale. A strategic 
-            thinker who bridges technology with business outcomes, driving measurable value across complex, 
-            multi-site operations.
+            Proven track record of architecting resilient, future-ready IT ecosystems — from establishing 
+            enterprise-wide security postures and compliance frameworks to orchestrating complex M&A technology 
+            integrations and cloud-hybrid transformations. Adept at aligning technology roadmaps with C-suite 
+            priorities to deliver measurable business value across geographically distributed, multi-stakeholder 
+            environments.
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">

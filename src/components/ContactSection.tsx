@@ -14,12 +14,13 @@ const ContactSection = () => {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <p className="text-hero-muted uppercase tracking-[0.2em] text-sm font-medium mb-3">Get in Touch</p>
+          <p className="text-hero-muted uppercase tracking-[0.2em] text-sm font-medium mb-3">Engage</p>
           <h2 className="text-3xl md:text-4xl font-display font-bold text-hero-foreground mb-6">
             Let's Connect
           </h2>
           <p className="text-hero-muted text-lg mb-10 max-w-2xl mx-auto">
-            Open to conversations around IT leadership, cyber security advisory, digital transformation strategy, and board-level consulting engagements.
+            Available for strategic conversations on technology leadership, cyber security advisory, 
+            digital transformation, and board-level consulting engagements.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-10">
