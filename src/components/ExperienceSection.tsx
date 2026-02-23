@@ -23,7 +23,7 @@ const CompanyLogo = ({ name }: { name: string }) => {
   if (!src || failed) return null;
 
   return (
-    <div className="w-12 h-12 md:w-14 md:h-14 rounded-lg bg-white flex items-center justify-center flex-shrink-0 overflow-hidden border border-border shadow-sm">
+    <div className="w-12 h-12 md:w-14 md:h-14 rounded-lg bg-white flex items-center justify-center flex-shrink-0 overflow-hidden border border-border shadow-sm transition-all duration-300 hover:shadow-md hover:scale-105 hover:border-accent">
       <img
         src={src}
         alt={`${name} logo`}
