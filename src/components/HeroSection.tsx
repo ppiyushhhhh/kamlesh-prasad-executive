@@ -1,8 +1,11 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { Linkedin, ChevronDown } from "lucide-react";
+import { Linkedin, ChevronDown, FileText } from "lucide-react";
 import kamleshPhoto from "@/assets/kamlesh-photo.jpg";
+import ResumeModal from "@/components/ResumeModal";
 
 const HeroSection = () => {
+  const [resumeOpen, setResumeOpen] = useState(false);
   const pillars = [
     "Cyber Security Leadership",
     "IT Infrastructure (On-Prem | Cloud | SaaS | Hybrid)",
@@ -102,7 +105,15 @@ const HeroSection = () => {
                 <Linkedin size={18} />
                 Connect on LinkedIn
               </a>
+              <button
+                onClick={() => setResumeOpen(true)}
+                className="px-8 py-3 border border-gold/60 text-gold rounded-md hover:bg-gold/10 transition-colors inline-flex items-center gap-2 font-semibold"
+              >
+                <FileText size={18} />
+                View Resume
+              </button>
             </motion.div>
+            <ResumeModal open={resumeOpen} onOpenChange={setResumeOpen} />
           </div>
         </div>
       </div>
