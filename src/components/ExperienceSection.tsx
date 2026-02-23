@@ -1,6 +1,38 @@
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Briefcase } from "lucide-react";
+
+import nexusLogo from "@/assets/logos/nexus-malls.png";
+import avenueLogo from "@/assets/logos/avenue-ecommerce.jfif";
+import accentureLogo from "@/assets/logos/accenture.jfif";
+import ibmLogo from "@/assets/logos/ibm.jfif";
+import sitelLogo from "@/assets/logos/sitel.jfif";
+
+const companyLogos: Record<string, string> = {
+  "Nexus Malls": nexusLogo,
+  "Avenue E-Commerce Limited": avenueLogo,
+  "Accenture Consulting Services": accentureLogo,
+  "IBM India Pvt Ltd": ibmLogo,
+  "Sitel India Pvt Ltd": sitelLogo,
+};
+
+const CompanyLogo = ({ name }: { name: string }) => {
+  const [failed, setFailed] = useState(false);
+  const src = companyLogos[name];
+
+  if (!src || failed) return null;
+
+  return (
+    <div className="w-12 h-12 md:w-14 md:h-14 rounded-lg bg-white flex items-center justify-center flex-shrink-0 overflow-hidden border border-border shadow-sm">
+      <img
+        src={src}
+        alt={`${name} logo`}
+        className="max-w-[40px] max-h-[40px] md:max-w-[46px] md:max-h-[46px] object-contain"
+        onError={() => setFailed(true)}
+      />
+    </div>
+  );
+};
 
 interface Role {
   title: string;
@@ -165,17 +197,20 @@ const ExperienceSection = () => {
                 transition={{ delay: 0.15 * ci, duration: 0.5 }}
               >
                 {/* Company header */}
-                <div className="flex items-center gap-4 mb-6 pl-2">
+                <div className="flex items-start md:items-center gap-4 mb-6 pl-2">
                   <div className="w-10 h-10 md:w-14 md:h-14 rounded-full bg-primary flex items-center justify-center flex-shrink-0 z-10 shadow-md">
                     <Briefcase className="text-primary-foreground" size={18} />
                   </div>
-                  <div>
-                    <h3 className="text-xl md:text-2xl font-display font-bold text-foreground">
-                      {company.name}
-                    </h3>
-                    {company.tenure && (
-                      <p className="text-sm text-muted-foreground">{company.tenure}</p>
-                    )}
+                  <div className="flex flex-col md:flex-row md:items-center gap-3">
+                    <CompanyLogo name={company.name} />
+                    <div>
+                      <h3 className="text-xl md:text-2xl font-display font-bold text-foreground">
+                        {company.name}
+                      </h3>
+                      {company.tenure && (
+                        <p className="text-sm text-muted-foreground">{company.tenure}</p>
+                      )}
+                    </div>
                   </div>
                 </div>
 
