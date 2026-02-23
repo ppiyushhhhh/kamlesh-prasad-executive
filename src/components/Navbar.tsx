@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, FileText } from "lucide-react";
+import ResumeModal from "@/components/ResumeModal";
 
 const links = [
   { label: "Profile", href: "#profile" },
@@ -13,6 +14,7 @@ const links = [
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [resumeOpen, setResumeOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -51,6 +53,13 @@ const Navbar = () => {
               {l.label}
             </a>
           ))}
+          <button
+            onClick={() => setResumeOpen(true)}
+            className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-md bg-gold text-primary text-sm font-semibold hover:opacity-90 transition-opacity"
+          >
+            <FileText size={14} />
+            Resume
+          </button>
         </div>
 
         {/* Mobile toggle */}
@@ -75,8 +84,16 @@ const Navbar = () => {
               {l.label}
             </a>
           ))}
+          <button
+            onClick={() => { setMobileOpen(false); setResumeOpen(true); }}
+            className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-md bg-gold text-primary text-sm font-semibold hover:opacity-90 transition-opacity"
+          >
+            <FileText size={14} />
+            Resume
+          </button>
         </div>
       )}
+      <ResumeModal open={resumeOpen} onOpenChange={setResumeOpen} />
     </nav>
   );
 };
