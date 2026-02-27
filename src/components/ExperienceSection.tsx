@@ -216,10 +216,15 @@ const ExperienceSection = () => {
 
                 {/* Roles */}
                 <div className="ml-16 md:ml-20 space-y-6">
-                  {company.roles.map((role) => (
-                    <div
+                  {company.roles.map((role, ri) => (
+                    <motion.div
                       key={role.title}
-                      className="bg-card rounded-lg p-6 shadow-sm border border-border card-hover"
+                      initial={{ opacity: 0, y: 30, scale: 0.97 }}
+                      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                      viewport={{ once: true, margin: "-40px" }}
+                      transition={{ delay: 0.1 * ri, duration: 0.5, ease: "easeOut" }}
+                      whileHover={{ y: -4, boxShadow: "0 8px 30px -12px hsl(var(--primary) / 0.15)" }}
+                      className="bg-card rounded-lg p-6 shadow-sm border border-border transition-colors duration-300 hover:border-accent/40"
                     >
                       <h4 className="font-semibold text-foreground mb-1">{role.title}</h4>
                       <p className="text-sm text-accent font-medium mb-1">{role.duration}</p>
@@ -232,7 +237,7 @@ const ExperienceSection = () => {
                           </li>
                         ))}
                       </ul>
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
               </motion.div>
