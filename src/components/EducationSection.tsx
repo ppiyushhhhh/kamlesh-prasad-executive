@@ -42,10 +42,12 @@ const EducationSection = () => {
           {education.map((edu, i) => (
             <motion.div
               key={edu.degree}
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.15 * i }}
-              className="flex items-start gap-4 bg-card border border-border rounded-lg p-6 card-hover"
+              initial={{ opacity: 0, y: 30, scale: 0.97 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ delay: 0.1 * i, duration: 0.5, ease: "easeOut" }}
+              whileHover={{ y: -4, boxShadow: "0 8px 30px -12px hsl(var(--primary) / 0.15)" }}
+              className="flex items-start gap-4 bg-card border border-border rounded-lg p-6 transition-colors duration-300 hover:border-accent/40"
             >
               <div className="w-10 h-10 rounded-full bg-accent/15 flex items-center justify-center flex-shrink-0 mt-0.5">
                 <GraduationCap className="text-accent" size={20} />
