@@ -42,10 +42,12 @@ const ExpertiseSection = () => {
           {expertise.map((item, i) => (
             <motion.div
               key={item.title}
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.1 * i, duration: 0.5 }}
-              className="bg-card border border-border rounded-lg p-6 card-hover group"
+              initial={{ opacity: 0, y: 30, scale: 0.97 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ delay: 0.1 * i, duration: 0.5, ease: "easeOut" }}
+              whileHover={{ y: -4, boxShadow: "0 8px 30px -12px hsl(var(--primary) / 0.15)" }}
+              className="bg-card border border-border rounded-lg p-6 group transition-colors duration-300 hover:border-accent/40"
             >
               <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
                 <item.icon className="text-primary" size={24} />
