@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Menu, X, FileText } from "lucide-react";
+import { Menu, X, FileText, Sun, Moon } from "lucide-react";
 import ResumeModal from "@/components/ResumeModal";
 
 const links = [
@@ -15,12 +15,22 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [resumeOpen, setResumeOpen] = useState(false);
+  const [dark, setDark] = useState(() => {
+    if (typeof window !== "undefined") {
+      return document.documentElement.classList.contains("dark");
+    }
+    return false;
+  });
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", dark);
+  }, [dark]);
 
   return (
     <nav
@@ -54,6 +64,15 @@ const Navbar = () => {
             </a>
           ))}
           <button
+            onClick={() => setDark(!dark)}
+            className={`p-2 rounded-md transition-colors ${
+              scrolled ? "text-muted-foreground hover:text-foreground" : "text-hero-muted hover:text-hero-foreground"
+            }`}
+            aria-label="Toggle dark mode"
+          >
+            {dark ? <Sun size={18} /> : <Moon size={18} />}
+          </button>
+          <button
             onClick={() => setResumeOpen(true)}
             className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-md bg-gold text-primary text-sm font-semibold hover:opacity-90 transition-opacity"
           >
@@ -84,13 +103,22 @@ const Navbar = () => {
               {l.label}
             </a>
           ))}
-          <button
-            onClick={() => { setMobileOpen(false); setResumeOpen(true); }}
-            className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-md bg-gold text-primary text-sm font-semibold hover:opacity-90 transition-opacity"
-          >
-            <FileText size={14} />
-            Resume
-          </button>
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => setDark(!dark)}
+              className="p-2 rounded-md text-muted-foreground hover:text-foreground transition-colors"
+              aria-label="Toggle dark mode"
+            >
+              {dark ? <Sun size={18} /> : <Moon size={18} />}
+            </button>
+            <button
+              onClick={() => { setMobileOpen(false); setResumeOpen(true); }}
+              className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-md bg-gold text-primary text-sm font-semibold hover:opacity-90 transition-opacity"
+            >
+              <FileText size={14} />
+              Resume
+            </button>
+          </div>
         </div>
       )}
       <ResumeModal open={resumeOpen} onOpenChange={setResumeOpen} />
