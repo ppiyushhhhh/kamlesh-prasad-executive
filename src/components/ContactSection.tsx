@@ -1,6 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Mail, Linkedin, MapPin, Phone } from "lucide-react";
+import { Mail, Linkedin, MapPin } from "lucide-react";
 
 const ContactSection = () => {
   const ref = useRef(null);
@@ -30,13 +30,6 @@ const ContactSection = () => {
             >
               <Mail size={20} />
               <span>kamlesh.prasad@gmail.com</span>
-            </a>
-            <a
-              href="tel:+919004348595"
-              className="flex items-center gap-3 text-hero-foreground hover:text-gold transition-colors"
-            >
-              <Phone size={20} />
-              <span>(+91) 9004348595</span>
             </a>
             <a
               href="https://www.linkedin.com/in/kamleshsprasad0512/"
