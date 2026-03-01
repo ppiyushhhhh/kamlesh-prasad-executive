@@ -28,17 +28,13 @@ const ProfileSection = () => {
           </h2>
 
           <p className="text-muted-foreground text-lg leading-relaxed mb-6">
-            A transformational technology executive with 20+ years of progressive leadership in enterprise 
-            IT strategy, cyber security governance, and large-scale infrastructure modernization. Currently 
-            serving as General Manager – IT Operations, Infrastructure & Cyber Security at Nexus Malls, 
-            steering the technology vision for one of India's premier retail real estate platforms.
+            Senior IT Leader with over 22+ years' experience, including 10+ years in Retail, 8 years in IBM & Accenture, and 4 years in Technical Support Services for India & USA. In the last 8 years, played leadership roles in Digital Transformation, IT Security, Merger IT Integration, Data & Analytics, IT Operations & Business Support Services programs.
+          </p>
+          <p className="text-muted-foreground text-lg leading-relaxed mb-4">
+            Effective at partnering with CXOs, senior leaders & partners to understand strategic goals and provide technological direction & IT roadmaps for delivering digital capabilities in alignment with business strategies. Strong business knowledge with proven ability to lead the strategic planning & delivery of innovative, cost-effective solutions by leveraging emerging technologies.
           </p>
           <p className="text-muted-foreground text-lg leading-relaxed mb-10">
-            Proven track record of architecting resilient, future-ready IT ecosystems — from establishing 
-            enterprise-wide security postures and compliance frameworks to orchestrating complex M&A technology 
-            integrations and cloud-hybrid transformations. Adept at aligning technology roadmaps with C-suite 
-            priorities to deliver measurable business value across geographically distributed, multi-stakeholder 
-            environments.
+            Collaborative leadership style with experience in building & leading cross-functional teams that deliver results in a highly competitive & continuously changing business landscape. Diversified IT Delivery & Operations model experience with technology partners like IBM, TCS, Wipro & Accenture.
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">

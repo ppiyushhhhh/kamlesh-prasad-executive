@@ -4,19 +4,19 @@ import { GraduationCap } from "lucide-react";
 
 const education = [
   {
-    degree: "PG Certificate in Cybersecurity",
-    institution: "MIT xPRO",
-    period: "2024 – 2025",
+    degree: "Post Graduate Certificate in Cyber Security",
+    institution: "MIT xPRO, USA",
+    period: "2024",
   },
   {
-    degree: "MBA (Management Information Systems)",
-    institution: "Sikkim Manipal University – Distance Education",
-    period: "2012 – 2014",
+    degree: "MBA – Systems",
+    institution: "Sikkim Manipal (Open) University, India",
+    period: "2014",
   },
   {
-    degree: "Bachelor of Science",
-    institution: "MP Bhoj Open University",
-    period: "2003 – 2006",
+    degree: "BSc – Graduate",
+    institution: "Madhya Pradesh Bhoj (Open) University, India",
+    period: "",
   },
 ];
 
