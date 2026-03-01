@@ -11,13 +11,13 @@ import {
 } from "lucide-react";
 
 const expertise = [
-  { icon: Server, title: "Enterprise IT Operations", desc: "End-to-end ownership of mission-critical IT operations across on-premise, cloud, SaaS, and hybrid environments — ensuring availability, performance, and business continuity." },
-  { icon: ShieldCheck, title: "Cyber Security Governance", desc: "Establishing enterprise security posture, InfoSec governance frameworks, risk quantification, and regulatory compliance aligned with board-level expectations." },
-  { icon: Cloud, title: "Cloud Strategy & Architecture", desc: "Defining cloud-first strategies and leading large-scale Microsoft 365 and hybrid cloud migrations that accelerate digital agility." },
-  { icon: HardDrive, title: "Data Center & BC/DR Strategy", desc: "Strategic planning, design, and commissioning of Data Centers, Disaster Recovery, and Near-DR facilities ensuring zero-downtime resilience." },
-  { icon: Network, title: "Network & Perimeter Defense", desc: "Architecting multi-layered network security — WAF, next-gen firewalls, load balancers — to safeguard enterprise perimeters at scale." },
-  { icon: BarChart3, title: "Data Analytics & BI", desc: "Leveraging Power BI and business intelligence platforms to deliver actionable insights that inform executive decision-making." },
-  { icon: Users, title: "IT Workforce Strategy", desc: "Building and scaling high-performance technology teams through strategic hiring, capability development, and capacity planning." },
+  { icon: ShieldCheck, title: "IT Security & CISO Practice", desc: "SOC, NOC, ITSM, ITAM, BCP-DR, VAPT (Black, Brown & White Box), SIEM, EDR, Zscaler, SSO — leading end-to-end cyber security posture." },
+  { icon: Server, title: "Digital Transformation", desc: "Spearheaded transformation from 2 malls to 20+ malls. Built 98% Cloud Compute Organization (SaaS, PaaS, IaaS) with zero data loss." },
+  { icon: Cloud, title: "Cloud & Infrastructure", desc: "3-Tier DC/DR/NDR deployments, Microsoft 365, hybrid cloud migrations, MPLS networks, SD-WAN, and Active-Active HA configurations." },
+  { icon: BarChart3, title: "IT Governance & Compliance", desc: "ITGC, SEBI, CERT-In, DPDP Act, NIST & SANS frameworks. ERM post listing achieving risk score of 3.2 (best in REIT)." },
+  { icon: Network, title: "Program & Vendor Management", desc: "Multi-vendor management with IBM, TCS, Wipro & Accenture. SOW, RFI/RFP, IT Services contracts & negotiations." },
+  { icon: HardDrive, title: "M&A IT Integration", desc: "Technology due diligence, knowledge transfer, data migration, employee rebadging, and digital transformation for acquisitions." },
+  { icon: Users, title: "Stakeholder Engagement", desc: "Primary IT interface to CXOs, Head of Departments, Centre Directors. Steering committee reviews and business benefits realization." },
 ];
 
 const ExpertiseSection = () => {

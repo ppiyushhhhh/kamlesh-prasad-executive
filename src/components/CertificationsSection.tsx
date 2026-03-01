@@ -5,8 +5,10 @@ import { Award } from "lucide-react";
 const certifications = [
   "ITIL Intermediate – Service Operations",
   "ITIL V3 Foundation",
-  "MCITP Enterprise",
   "VMware vSphere 6.5 Foundations",
+  "MCITP Enterprise (Microsoft Windows Server)",
+  "Microsoft Exchange Certified",
+  "LEAD – Leadership Excellence & Development Program (upGrad, 2024)",
 ];
 
 const CertificationsSection = () => {
