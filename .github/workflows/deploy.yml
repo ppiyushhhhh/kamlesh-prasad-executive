@@ -1,27 +1,27 @@
 name: EC2 Deployment
 
 on:
-push:
-branches:
-- main
+  push:
+    branches:
+      - main
 
 jobs:
-deploy:
-name: Deploy to EC2
-runs-on: ubuntu-latest
+  deploy:
+    name: Deploy to EC2
+    runs-on: ubuntu-latest
 
-steps:
-  - name: Deploy to EC2 server
-    uses: appleboy/ssh-action@v1.0.3
-    with:
-      host: 13.203.154.124
-      username: ubuntu
-      key: ${{ secrets.EC2_SSH_KEY }}
-      script: |
-        cd ~/kamlesh-prasad-executive
-        git pull origin main
-        npm install
-        npm run build
-        sudo rm -rf /var/www/html/*
-        sudo cp -r dist/* /var/www/html/
-        sudo systemctl restart nginx
+    steps:
+      - name: Deploy to EC2 server
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: 13.203.154.124
+          username: ubuntu
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            cd ~/kamlesh-prasad-executive
+            git pull origin main
+            npm install
+            npm run build
+            sudo rm -rf /var/www/html/*
+            sudo cp -r dist/* /var/www/html/
+            sudo systemctl restart nginx
