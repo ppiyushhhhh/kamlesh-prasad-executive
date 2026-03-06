@@ -1,177 +1,297 @@
-# CI/CD Deployment of React Application on AWS EC2 using GitHub Actions
-
-## Live Website
-
-http://13.203.154.124
-
-The application is hosted on an AWS EC2 Ubuntu instance and served using the Nginx web server.
-
-## Monitoring Dashboard
-
-http://13.203.154.124:19999
-
-A Netdata monitoring dashboard has been configured on the server to monitor real-time system metrics such as CPU usage, memory utilization, disk activity, and network traffic.
+# DevOps Monitoring and CI/CD Deployment Project
 
 ## Project Overview
 
-This project demonstrates an end-to-end CI/CD pipeline that automatically builds and deploys a React application to an AWS EC2 server using GitHub Actions and Nginx.
+This project demonstrates a practical DevOps workflow where a web application is automatically deployed to an AWS EC2 server and monitored using a modern monitoring stack.
 
-The objective of this project is to automate the deployment workflow so that every code change pushed to GitHub is automatically built and deployed to a live server without manual intervention.
+The application is served using Nginx while infrastructure metrics are collected using Node Exporter. Prometheus continuously scrapes these metrics and stores them as time-series data. Grafana connects to Prometheus and visualizes the system performance through interactive dashboards.
 
-## Technologies Used
+This setup represents a simplified production-style monitoring environment used in real DevOps infrastructure.
 
-Git and GitHub for version control
-GitHub Actions for CI/CD automation
-AWS EC2 (Ubuntu) as the hosting server
-Nginx as the web server
-Node.js and npm for application build process
-React and Vite for frontend development
-Netdata for server monitoring
-Linux for server administration
+Server Public IP
+13.203.154.124
+
+---
 
 ## Architecture
 
-Developer → GitHub Repository → GitHub Actions CI/CD → SSH → AWS EC2 Server → Nginx → Live Website
+User → Nginx Web Server → Website
 
-Monitoring Layer:
+Monitoring Stack
+Node Exporter → Prometheus → Grafana
 
-Netdata → Server Metrics → Real-time Monitoring Dashboard
+Deployment Pipeline
+GitHub Repository → GitHub Actions → EC2 Deployment
 
-## Project Structure
+---
 
-project-root
-├── src/
-├── public/
-├── dist/
-├── .github/workflows/
-│   └── deploy.yml
-├── package.json
-└── README.md
+## Technologies Used
 
-src contains the React application source code.
+AWS EC2 (Ubuntu Server)
 
-dist contains the production build files generated during the build process.
+Nginx (Web Server)
 
-.github/workflows contains the CI/CD workflow configuration.
+GitHub Actions (CI/CD Pipeline)
 
-## Server Setup
+Prometheus (Metrics Collection)
 
-An AWS EC2 Ubuntu instance was created to host the application.
+Node Exporter (System Metrics Exporter)
 
-The following setup was completed:
+Grafana (Monitoring Dashboard)
 
-Install Node.js and npm
-Install and configure Nginx
-Clone the project repository
-Generate production build files
-Deploy build files to Nginx web directory
-Install Netdata monitoring tool
+Linux Systemd Services
 
-Deployment directory used on the server:
+Git and GitHub
 
-/var/www/html/
+---
 
-Nginx serves the static website from this directory.
+## Key Features
 
-## Application Build Process
+Automatic deployment using GitHub Actions
 
-The React application uses a production build process to generate optimized static files.
+Nginx hosting the production build of the website
 
-Commands used:
+Real-time infrastructure monitoring
 
-npm install
-npm run build
+CPU usage monitoring
 
-The build command generates a dist directory containing optimized HTML, CSS, and JavaScript files.
+Memory usage monitoring
 
-These files are deployed to the Nginx server.
+Disk utilization monitoring
 
-## CI/CD Pipeline
+Network traffic monitoring
 
-A CI/CD pipeline has been implemented using GitHub Actions.
+Prometheus time-series metrics storage
 
-Workflow file location:
+Grafana dashboards for visualization
 
-.github/workflows/deploy.yml
+System services managed using systemd
 
-The pipeline automatically triggers when code is pushed to the main branch.
+---
 
-### Deployment Process
+## EC2 Server Setup
 
-1. Developer pushes code to GitHub
-2. GitHub Actions workflow is triggered
-3. Workflow connects to EC2 server using SSH
-4. Latest code is pulled from the repository
-5. Project dependencies are installed
-6. Application build process runs
-7. Existing deployment files are removed
-8. New build files are copied to the Nginx directory
-9. Nginx service is restarted
-10. Updated website becomes live
+Launch an AWS EC2 Ubuntu instance.
 
-## Monitoring Implementation
+Update system packages.
 
-Netdata has been installed on the EC2 server to monitor system performance.
+sudo apt update
 
-The monitoring dashboard provides real-time visibility into:
+Install required tools.
+
+sudo apt install nginx git nodejs npm
+
+Clone the repository.
+
+git clone https://github.com/your-repository/project.git
+
+---
+
+## Nginx Configuration
+
+Nginx is used as the web server to host the application.
+
+Default web directory
+
+/var/www/html
+
+Restart nginx
+
+sudo systemctl restart nginx
+
+Access the website
+
+http://13.203.154.124
+
+---
+
+## CI/CD Deployment Using GitHub Actions
+
+A GitHub Actions workflow automatically deploys updates to the EC2 server.
+
+Workflow process
+
+Connect to EC2 server using SSH
+
+Pull latest source code from GitHub
+
+Install dependencies
+
+Build the project
+
+Copy build files to Nginx directory
+
+Restart Nginx service
+
+Deployment is triggered whenever code is pushed to the main branch.
+
+---
+
+## Node Exporter Setup
+
+Node Exporter collects hardware and operating system metrics from the EC2 server.
+
+Metrics collected
 
 CPU usage
+
 Memory usage
+
+Disk usage
+
+Network statistics
+
+Node Exporter runs on port
+
+9100
+
+Metrics endpoint
+
+http://13.203.154.124:9100/metrics
+
+---
+
+## Prometheus Setup
+
+Prometheus scrapes metrics from Node Exporter and stores them in a time-series database.
+
+Scrape target
+
+localhost:9100
+
+Prometheus runs on port
+
+9090
+
+Prometheus web interface
+
+http://13.203.154.124:9090
+
+Prometheus continuously collects and stores monitoring data.
+
+---
+
+## Grafana Setup
+
+Grafana is used for visualizing monitoring data collected by Prometheus.
+
+Grafana runs on port
+
+3000
+
+Grafana dashboard
+
+http://13.203.154.124:3000
+
+Default login credentials
+
+Username: admin
+Password: admin
+
+Grafana connects to Prometheus as a data source and displays system performance metrics.
+
+---
+
+## Grafana Dashboard
+
+The project uses the Node Exporter Full dashboard from the Grafana dashboard library.
+
+Dashboard ID
+
+1860
+
+Metrics displayed
+
+CPU usage
+
+Memory usage
+
 Disk utilization
+
 Network traffic
-System processes
 
-Monitoring Dashboard Access:
+System load
 
-http://13.203.154.124:19999
+Filesystem usage
 
-## Secure Authentication
+---
 
-Secure communication between GitHub Actions and the EC2 instance is configured using SSH keys.
+## Monitoring Flow
 
-Implementation steps:
+Node Exporter collects server metrics.
 
-Generate SSH key pair
-Store private key in GitHub repository secrets
-Configure workflow to use the SSH key for deployment
+Prometheus scrapes metrics from Node Exporter.
 
-Secret used:
+Prometheus stores the data.
 
-EC2_SSH_KEY
+Grafana queries Prometheus.
 
-## Automated Deployment Workflow
+Grafana dashboards visualize server performance.
 
-Developer updates application code
-Code is pushed to GitHub
-GitHub Actions pipeline runs automatically
-EC2 server pulls the latest code
-Application is rebuilt
-Updated files are deployed to Nginx
-Live website is updated automatically
+---
 
-## Skills Demonstrated
+## Project Screenshots
 
-Linux server management
-AWS EC2 infrastructure management
-Nginx web server configuration
-Git version control
-CI/CD pipeline implementation using GitHub Actions
-SSH authentication and secure server access
-Automated application deployment
-Server monitoring using Netdata
+### Grafana Monitoring Dashboard
+
+This dashboard visualizes CPU, memory, disk usage, and system metrics collected from the EC2 instance.
+
+![Grafana Dashboard](screenshots/grafana-dashboard.png)
+
+---
+
+### Prometheus Targets
+
+Prometheus successfully scraping metrics from Node Exporter and monitoring the EC2 server.
+
+![Prometheus Targets](screenshots/prometheus-targets.png)
+
+---
+
+### GitHub Actions CI/CD Pipeline
+
+Automated deployment pipeline that deploys the application to the EC2 server when code is pushed to the repository.
+
+![GitHub Actions](screenshots/github-actions.png)
+
+---
+
+## Running Services
+
+All monitoring components run as Linux system services.
+
+node_exporter.service
+
+prometheus.service
+
+grafana-server.service
+
+nginx.service
+
+This ensures all services automatically start when the server reboots.
+
+---
 
 ## Future Improvements
 
-Add a custom domain to the website instead of using the EC2 public IP address.
+Add custom domain with DNS configuration
 
-Configure DNS records to point the domain to the EC2 server.
+Enable HTTPS using Let's Encrypt SSL certificates
 
-Enable HTTPS using SSL certificates.
+Implement Prometheus Alertmanager for alerting
 
-Future enhancements may include:
+Add application-level monitoring
 
-Prometheus and Grafana monitoring stack
-Docker containerization
-Infrastructure as Code using Terraform
-Automated server provisioning
+Containerize the application using Docker
 
+Provision infrastructure using Terraform
+
+Implement centralized logging
+
+---
+
+## Author
+
+Piyush Prasad
+
+DevOps Monitoring and Deployment Project
