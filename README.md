@@ -1,12 +1,12 @@
-# DevOps Monitoring and CI/CD Deployment Project
+# DevOps Monitoring & CI/CD Deployment Project
 
 ## Project Overview
 
-This project demonstrates a practical DevOps workflow where a web application is automatically deployed to an AWS EC2 server and monitored using a modern monitoring stack.
+This project demonstrates a complete DevOps workflow where a website is automatically deployed to an AWS EC2 server using GitHub Actions and monitored using Prometheus, Node Exporter, and Grafana.
 
-The application is served using Nginx while infrastructure metrics are collected using Node Exporter. Prometheus continuously scrapes these metrics and stores them as time-series data. Grafana connects to Prometheus and visualizes the system performance through interactive dashboards.
+The application is hosted using Nginx and infrastructure metrics are collected and visualized through a monitoring stack.
 
-This setup represents a simplified production-style monitoring environment used in real DevOps infrastructure.
+Metrics such as CPU usage, memory usage, disk utilization, and network traffic are collected using Node Exporter and Prometheus and visualized in Grafana dashboards.
 
 Server Public IP
 13.203.154.124
@@ -29,69 +29,75 @@ GitHub Repository → GitHub Actions → EC2 Deployment
 
 AWS EC2 (Ubuntu Server)
 
-Nginx (Web Server)
+Nginx Web Server
 
-GitHub Actions (CI/CD Pipeline)
+GitHub Actions CI/CD
 
-Prometheus (Metrics Collection)
+Prometheus Monitoring
 
-Node Exporter (System Metrics Exporter)
+Node Exporter System Metrics
 
-Grafana (Monitoring Dashboard)
+Grafana Dashboard Visualization
 
 Linux Systemd Services
 
-Git and GitHub
+Git & GitHub
 
 ---
 
-## Key Features
+## Features
 
-Automatic deployment using GitHub Actions
+Automatic website deployment using GitHub Actions
 
-Nginx hosting the production build of the website
+Website hosting using Nginx
 
-Real-time infrastructure monitoring
+Real time infrastructure monitoring
 
-CPU usage monitoring
+CPU monitoring
 
-Memory usage monitoring
+Memory monitoring
 
-Disk utilization monitoring
+Disk usage monitoring
 
 Network traffic monitoring
 
-Prometheus time-series metrics storage
+Prometheus metrics collection
 
-Grafana dashboards for visualization
+Grafana monitoring dashboards
 
-System services managed using systemd
+Automatic service startup using systemd
 
 ---
 
-## EC2 Server Setup
+## Project Setup
 
-Launch an AWS EC2 Ubuntu instance.
+### 1. Launch EC2 Instance
 
-Update system packages.
+Create an Ubuntu EC2 instance from AWS Console and connect using SSH.
+
+Example connection
+
+ssh -i key.pem ubuntu@13.203.154.124
+
+Update packages
 
 sudo apt update
 
-Install required tools.
+---
 
-sudo apt install nginx git nodejs npm
+### 2. Install Required Packages
 
-Clone the repository.
+Install necessary tools and web server.
 
-git clone https://github.com/your-repository/project.git
+sudo apt install nginx git nodejs npm -y
 
 ---
 
-## Nginx Configuration
+### 3. Configure Nginx
 
-Nginx is used as the web server to host the application.
+Nginx hosts the application files.
 
-Default web directory
+Web root directory
 
 /var/www/html
 
@@ -99,39 +105,39 @@ Restart nginx
 
 sudo systemctl restart nginx
 
-Access the website
+Access website
 
 http://13.203.154.124
 
 ---
 
-## CI/CD Deployment Using GitHub Actions
+### 4. CI/CD Deployment Using GitHub Actions
 
-A GitHub Actions workflow automatically deploys updates to the EC2 server.
+GitHub Actions automatically deploys the application to the EC2 server.
 
 Workflow process
 
-Connect to EC2 server using SSH
+Connect to EC2 using SSH
 
-Pull latest source code from GitHub
+Pull latest code from GitHub repository
 
-Install dependencies
+Install project dependencies
 
-Build the project
+Build application
 
-Copy build files to Nginx directory
+Copy files to Nginx directory
 
 Restart Nginx service
 
-Deployment is triggered whenever code is pushed to the main branch.
+Deployment runs automatically when code is pushed to the main branch.
 
 ---
 
-## Node Exporter Setup
+### 5. Install Node Exporter
 
-Node Exporter collects hardware and operating system metrics from the EC2 server.
+Node Exporter collects server level metrics.
 
-Metrics collected
+Metrics include
 
 CPU usage
 
@@ -151,11 +157,11 @@ http://13.203.154.124:9100/metrics
 
 ---
 
-## Prometheus Setup
+### 6. Install Prometheus
 
-Prometheus scrapes metrics from Node Exporter and stores them in a time-series database.
+Prometheus scrapes metrics from Node Exporter.
 
-Scrape target
+Example scrape configuration
 
 localhost:9100
 
@@ -163,17 +169,17 @@ Prometheus runs on port
 
 9090
 
-Prometheus web interface
+Prometheus UI
 
 http://13.203.154.124:9090
 
-Prometheus continuously collects and stores monitoring data.
+Prometheus stores monitoring metrics in a time series database.
 
 ---
 
-## Grafana Setup
+### 7. Install Grafana
 
-Grafana is used for visualizing monitoring data collected by Prometheus.
+Grafana visualizes metrics collected by Prometheus.
 
 Grafana runs on port
 
@@ -183,18 +189,18 @@ Grafana dashboard
 
 http://13.203.154.124:3000
 
-Default login credentials
+Default login
 
 Username: admin
 Password: admin
 
-Grafana connects to Prometheus as a data source and displays system performance metrics.
+Grafana connects to Prometheus as the data source.
 
 ---
 
-## Grafana Dashboard
+## Monitoring Dashboard
 
-The project uses the Node Exporter Full dashboard from the Grafana dashboard library.
+The Node Exporter Full dashboard is imported from the Grafana dashboard library.
 
 Dashboard ID
 
@@ -204,7 +210,7 @@ Metrics displayed
 
 CPU usage
 
-Memory usage
+RAM usage
 
 Disk utilization
 
@@ -216,49 +222,9 @@ Filesystem usage
 
 ---
 
-## Monitoring Flow
-
-Node Exporter collects server metrics.
-
-Prometheus scrapes metrics from Node Exporter.
-
-Prometheus stores the data.
-
-Grafana queries Prometheus.
-
-Grafana dashboards visualize server performance.
-
----
-
-## Project Screenshots
-
-### Grafana Monitoring Dashboard
-
-This dashboard visualizes CPU, memory, disk usage, and system metrics collected from the EC2 instance.
-
-![Grafana Dashboard](screenshots/grafana-dashboard.png)
-
----
-
-### Prometheus Targets
-
-Prometheus successfully scraping metrics from Node Exporter and monitoring the EC2 server.
-
-![Prometheus Targets](screenshots/prometheus-targets.png)
-
----
-
-### GitHub Actions CI/CD Pipeline
-
-Automated deployment pipeline that deploys the application to the EC2 server when code is pushed to the repository.
-
-![GitHub Actions](screenshots/github-actions.png)
-
----
-
 ## Running Services
 
-All monitoring components run as Linux system services.
+Monitoring services run as Linux system services.
 
 node_exporter.service
 
@@ -268,25 +234,43 @@ grafana-server.service
 
 nginx.service
 
-This ensures all services automatically start when the server reboots.
+This ensures services start automatically after server reboot.
+
+---
+
+## Project Screenshots
+
+### AWS EC2 Instance
+
+![EC2 Instance](screenshots/ec2-instance.png)
+
+---
+
+### Grafana Service Running
+
+![Grafana Service](screenshots/grafana-service.png)
+
+---
+
+### Prometheus and Node Exporter Services
+
+![Monitoring Services](screenshots/monitoring-services.png)
 
 ---
 
 ## Future Improvements
 
-Add custom domain with DNS configuration
+Add custom domain and DNS configuration
 
-Enable HTTPS using Let's Encrypt SSL certificates
+Enable HTTPS using Let's Encrypt
 
-Implement Prometheus Alertmanager for alerting
+Implement Prometheus Alertmanager
 
-Add application-level monitoring
+Add application level monitoring
 
-Containerize the application using Docker
+Containerize services using Docker
 
-Provision infrastructure using Terraform
-
-Implement centralized logging
+Use Terraform for infrastructure automation
 
 ---
 
@@ -294,4 +278,4 @@ Implement centralized logging
 
 Piyush Prasad
 
-DevOps Monitoring and Deployment Project
+DevOps Learning Project
