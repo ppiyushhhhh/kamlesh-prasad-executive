@@ -47,7 +47,7 @@ Git & GitHub
 
 ## Features
 
-Automatic website deployment using GitHub Actions
+Automatic deployment using GitHub Actions
 
 Website hosting using Nginx
 
@@ -63,9 +63,9 @@ Network traffic monitoring
 
 Prometheus metrics collection
 
-Grafana monitoring dashboards
+Grafana dashboards
 
-Automatic service startup using systemd
+System services configured for automatic startup
 
 ---
 
@@ -75,11 +75,11 @@ Automatic service startup using systemd
 
 Create an Ubuntu EC2 instance from AWS Console and connect using SSH.
 
-Example connection
+Example
 
 ssh -i key.pem ubuntu@13.203.154.124
 
-Update packages
+Update system
 
 sudo apt update
 
@@ -87,7 +87,7 @@ sudo apt update
 
 ### 2. Install Required Packages
 
-Install necessary tools and web server.
+Install necessary tools.
 
 sudo apt install nginx git nodejs npm -y
 
@@ -97,7 +97,7 @@ sudo apt install nginx git nodejs npm -y
 
 Nginx hosts the application files.
 
-Web root directory
+Website root directory
 
 /var/www/html
 
@@ -105,7 +105,7 @@ Restart nginx
 
 sudo systemctl restart nginx
 
-Access website
+Access the application
 
 http://13.203.154.124
 
@@ -115,21 +115,21 @@ http://13.203.154.124
 
 GitHub Actions automatically deploys the application to the EC2 server.
 
-Workflow process
+Workflow steps
 
-Connect to EC2 using SSH
+Connect to EC2 via SSH
 
 Pull latest code from GitHub repository
 
-Install project dependencies
+Install dependencies
 
-Build application
+Build project
 
-Copy files to Nginx directory
+Deploy files to Nginx directory
 
 Restart Nginx service
 
-Deployment runs automatically when code is pushed to the main branch.
+Deployment runs automatically whenever code is pushed to the main branch.
 
 ---
 
@@ -137,7 +137,7 @@ Deployment runs automatically when code is pushed to the main branch.
 
 Node Exporter collects server level metrics.
 
-Metrics include
+Metrics collected
 
 CPU usage
 
@@ -147,11 +147,11 @@ Disk usage
 
 Network statistics
 
-Node Exporter runs on port
+Node Exporter Port
 
 9100
 
-Metrics endpoint
+Metrics Endpoint
 
 http://13.203.154.124:9100/metrics
 
@@ -165,7 +165,7 @@ Example scrape configuration
 
 localhost:9100
 
-Prometheus runs on port
+Prometheus Port
 
 9090
 
@@ -173,7 +173,7 @@ Prometheus UI
 
 http://13.203.154.124:9090
 
-Prometheus stores monitoring metrics in a time series database.
+Prometheus stores monitoring data in a time series database.
 
 ---
 
@@ -181,15 +181,15 @@ Prometheus stores monitoring metrics in a time series database.
 
 Grafana visualizes metrics collected by Prometheus.
 
-Grafana runs on port
+Grafana Port
 
 3000
 
-Grafana dashboard
+Grafana Dashboard
 
 http://13.203.154.124:3000
 
-Default login
+Default Login
 
 Username: admin
 Password: admin
@@ -200,7 +200,7 @@ Grafana connects to Prometheus as the data source.
 
 ## Monitoring Dashboard
 
-The Node Exporter Full dashboard is imported from the Grafana dashboard library.
+The Node Exporter Full dashboard is imported from Grafana dashboard library.
 
 Dashboard ID
 
@@ -210,7 +210,7 @@ Metrics displayed
 
 CPU usage
 
-RAM usage
+Memory usage
 
 Disk utilization
 
@@ -224,17 +224,14 @@ Filesystem usage
 
 ## Running Services
 
-Monitoring services run as Linux system services.
+Monitoring components run as Linux services.
 
 node_exporter.service
-
 prometheus.service
-
 grafana-server.service
-
 nginx.service
 
-This ensures services start automatically after server reboot.
+This ensures services automatically start when the server reboots.
 
 ---
 
@@ -242,19 +239,37 @@ This ensures services start automatically after server reboot.
 
 ### AWS EC2 Instance
 
-![EC2 Instance](screenshots/ec2-instance.png)
+![EC2 Instance](screenshots/Ec2%20instance%20.png)
+
+---
+
+### GitHub Actions Deployment Pipeline
+
+![GitHub Actions](screenshots/github-actions.png)
+
+---
+
+### Grafana Monitoring Dashboard
+
+![Grafana Dashboard](screenshots/grafana-dashboard.png)
+
+---
+
+### Prometheus Monitoring Targets
+
+![Prometheus Targets](screenshots/prometheus-targets.png)
 
 ---
 
 ### Grafana Service Running
 
-![Grafana Service](screenshots/grafana-service.png)
+![Grafana Service](screenshots/systemctl%20status%20grafana-server.png)
 
 ---
 
 ### Prometheus and Node Exporter Services
 
-![Monitoring Services](screenshots/monitoring-services.png)
+![Monitoring Services](screenshots/systemctl%20status%20prometheus,%20systemctl%20status%20node_exporter.png)
 
 ---
 
@@ -264,13 +279,13 @@ Add custom domain and DNS configuration
 
 Enable HTTPS using Let's Encrypt
 
-Implement Prometheus Alertmanager
+Add Prometheus Alertmanager for alerts
 
-Add application level monitoring
+Monitor application level metrics
 
 Containerize services using Docker
 
-Use Terraform for infrastructure automation
+Implement Infrastructure as Code using Terraform
 
 ---
 
