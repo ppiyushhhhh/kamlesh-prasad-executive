@@ -1,296 +1,179 @@
-# DevOps Monitoring & CI/CD Deployment Project
+k# DevOps Monitoring Stack on AWS EC2
+
+This project demonstrates a complete monitoring setup using Prometheus, Grafana, Node Exporter, and Alertmanager deployed on an AWS EC2 instance. The stack monitors system metrics and sends email alerts when issues occur.
 
 ## Project Overview
 
-This project demonstrates a complete DevOps workflow where a website is automatically deployed to an AWS EC2 server using GitHub Actions and monitored using Prometheus, Node Exporter, and Grafana.
+The monitoring system collects metrics from the EC2 instance, visualizes them in Grafana dashboards, and triggers email alerts when predefined thresholds are exceeded.
 
-The application is hosted using Nginx and infrastructure metrics are collected and visualized through a monitoring stack.
+Public EC2 IP
 
-Metrics such as CPU usage, memory usage, disk utilization, and network traffic are collected using Node Exporter and Prometheus and visualized in Grafana dashboards.
-
-Server Public IP
 13.203.154.124
 
----
+Services
+
+Prometheus  
+Grafana  
+Node Exporter  
+Alertmanager  
 
 ## Architecture
 
-User → Nginx Web Server → Website
+Node Exporter collects system metrics from the EC2 server.
 
-Monitoring Stack
-Node Exporter → Prometheus → Grafana
+Prometheus scrapes the metrics from Node Exporter and evaluates alert rules.
 
-Deployment Pipeline
-GitHub Repository → GitHub Actions → EC2 Deployment
+Alertmanager receives alerts from Prometheus and sends email notifications.
 
----
+Grafana connects to Prometheus and visualizes metrics through dashboards.
 
-## Technologies Used
+Flow
 
-AWS EC2 (Ubuntu Server)
+Node Exporter → Prometheus → Alertmanager → Email Notification  
+Node Exporter → Prometheus → Grafana Dashboard
 
-Nginx Web Server
+## Services Access
 
-GitHub Actions CI/CD
-
-Prometheus Monitoring
-
-Node Exporter System Metrics
-
-Grafana Dashboard Visualization
-
-Linux Systemd Services
-
-Git & GitHub
-
----
-
-## Features
-
-Automatic deployment using GitHub Actions
-
-Website hosting using Nginx
-
-Real time infrastructure monitoring
-
-CPU monitoring
-
-Memory monitoring
-
-Disk usage monitoring
-
-Network traffic monitoring
-
-Prometheus metrics collection
-
-Grafana dashboards
-
-System services configured for automatic startup
-
----
-
-## Project Setup
-
-### 1. Launch EC2 Instance
-
-Create an Ubuntu EC2 instance from AWS Console and connect using SSH.
-
-Example
-
-ssh -i key.pem ubuntu@13.203.154.124
-
-Update system
-
-sudo apt update
-
----
-
-### 2. Install Required Packages
-
-Install necessary tools.
-
-sudo apt install nginx git nodejs npm -y
-
----
-
-### 3. Configure Nginx
-
-Nginx hosts the application files.
-
-Website root directory
-
-/var/www/html
-
-Restart nginx
-
-sudo systemctl restart nginx
-
-Access the application
-
-http://13.203.154.124
-
----
-
-### 4. CI/CD Deployment Using GitHub Actions
-
-GitHub Actions automatically deploys the application to the EC2 server.
-
-Workflow steps
-
-Connect to EC2 via SSH
-
-Pull latest code from GitHub repository
-
-Install dependencies
-
-Build project
-
-Deploy files to Nginx directory
-
-Restart Nginx service
-
-Deployment runs automatically whenever code is pushed to the main branch.
-
----
-
-### 5. Install Node Exporter
-
-Node Exporter collects server level metrics.
-
-Metrics collected
-
-CPU usage
-
-Memory usage
-
-Disk usage
-
-Network statistics
-
-Node Exporter Port
-
-9100
-
-Metrics Endpoint
-
-http://13.203.154.124:9100/metrics
-
----
-
-### 6. Install Prometheus
-
-Prometheus scrapes metrics from Node Exporter.
-
-Example scrape configuration
-
-localhost:9100
-
-Prometheus Port
-
-9090
-
-Prometheus UI
+Prometheus
 
 http://13.203.154.124:9090
 
-Prometheus stores monitoring data in a time series database.
+Alertmanager
 
----
+http://13.203.154.124:9093
 
-### 7. Install Grafana
-
-Grafana visualizes metrics collected by Prometheus.
-
-Grafana Port
-
-3000
-
-Grafana Dashboard
+Grafana
 
 http://13.203.154.124:3000
 
-Default Login
+Default Grafana Login
 
-Username: admin
+Username: admin  
 Password: admin
 
-Grafana connects to Prometheus as the data source.
+## Features
 
----
+System metrics monitoring  
+CPU usage monitoring  
+Memory usage monitoring  
+Disk usage monitoring  
+Instance availability monitoring  
+Email alerts when services go down  
+Grafana dashboards for visualization  
 
-## Monitoring Dashboard
+## Alerting System
 
-The Node Exporter Full dashboard is imported from Grafana dashboard library.
+Prometheus evaluates alert rules continuously. When a condition is met, the alert is sent to Alertmanager which then sends an email notification.
 
-Dashboard ID
+Example alert
 
-1860
+Instance Down Alert
 
-Metrics displayed
+Condition
 
-CPU usage
+up == 0
 
-Memory usage
+This alert triggers if the Node Exporter service becomes unavailable.
 
-Disk utilization
+Email notifications are sent via Gmail SMTP using Alertmanager.
 
-Network traffic
+## Screenshots
 
-System load
-
-Filesystem usage
-
----
-
-## Running Services
-
-Monitoring components run as Linux services.
-
-node_exporter.service
-prometheus.service
-grafana-server.service
-nginx.service
-
-This ensures services automatically start when the server reboots.
-
----
-
-## Project Screenshots
-
-### AWS EC2 Instance
+### EC2 Instance
 
 ![EC2 Instance](screenshots/Ec2%20instance%20.png)
 
----
-
-### GitHub Actions Deployment Pipeline
-
-![GitHub Actions](screenshots/github-actions.png)
-
----
-
-### Grafana Monitoring Dashboard
-
-![Grafana Dashboard](screenshots/grafana-dashboard.png)
-
----
-
-### Prometheus Monitoring Targets
+### Prometheus Targets
 
 ![Prometheus Targets](screenshots/prometheus-targets.png)
 
----
+### Grafana Dashboard
 
-### Grafana Service Running
+![Grafana Dashboard](screenshots/grafana-dashboard.png)
+
+### GitHub Actions
+
+![GitHub Actions](screenshots/github-actions.png)
+
+### Grafana Service Status
 
 ![Grafana Service](screenshots/systemctl%20status%20grafana-server.png)
 
----
+### Prometheus and Node Exporter Status
 
-### Prometheus and Node Exporter Services
+![Prometheus Node Exporter](screenshots/systemctl%20status%20prometheus,%20systemctl%20status%20node_exporter.png)
 
-![Monitoring Services](screenshots/systemctl%20status%20prometheus,%20systemctl%20status%20node_exporter.png)
+## Alert Testing
 
----
+Alerts were tested by stopping services and generating system load.
+
+Example tests
+
+Stop Node Exporter
+
+sudo systemctl stop node_exporter
+
+Generate CPU Load
+
+stress --cpu 2 --timeout 120
+
+## Installation Steps
+
+Update packages
+
+sudo apt update
+
+Install Node Exporter
+
+Download Node Exporter  
+Create service file  
+Start Node Exporter
+
+Install Prometheus
+
+Download Prometheus  
+Configure prometheus.yml  
+Create service file  
+Start Prometheus
+
+Install Grafana
+
+sudo apt install grafana
+
+Start Grafana
+
+sudo systemctl start grafana-server
+
+Install Alertmanager
+
+Download Alertmanager  
+Configure alertmanager.yml  
+Create service file  
+Start Alertmanager
+
+## Security Group Configuration
+
+Allowed Ports
+
+22  SSH  
+3000 Grafana  
+9090 Prometheus  
+9093 Alertmanager  
 
 ## Future Improvements
 
-Add custom domain and DNS configuration
+Add more alert rules such as
 
-Enable HTTPS using Let's Encrypt
+High CPU usage alert  
+High memory usage alert  
+Low disk space alert  
 
-Add Prometheus Alertmanager for alerts
+Integrate Slack notifications
 
-Monitor application level metrics
-
-Containerize services using Docker
-
-Implement Infrastructure as Code using Terraform
-
----
+Add HTTPS security for dashboards
 
 ## Author
 
 Piyush Prasad
 
-DevOps Learning Project
+DevOps and Cloud Enthusiast
