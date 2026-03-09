@@ -1,23 +1,29 @@
-# Portfolio Website Deployment on AWS EC2 with GoDaddy Domain and Cloudflare DNS
+# Portfolio Website Deployment on AWS EC2 with GoDaddy Domain, Cloudflare DNS, SSL, and GitHub Actions
 
-This project demonstrates how to deploy a portfolio website on an AWS EC2 instance using Nginx as the web server. The domain was purchased from GoDaddy and DNS is managed through Cloudflare. The goal of this project is to host a static portfolio website on a cloud server and make it accessible through a custom domain.
+This project demonstrates how to deploy a portfolio website on an AWS EC2 instance using Nginx as the web server. The domain is purchased from GoDaddy and DNS is managed through Cloudflare. SSL is enabled for secure HTTPS access, and GitHub Actions is used to automatically deploy updates to the EC2 server whenever changes are pushed to the repository.
 
-## Project Overview
+Project Overview
 
-The website is hosted on an AWS EC2 instance running Ubuntu Linux. Nginx is used as the web server to serve the website files. Cloudflare is used to manage DNS records and connect the domain to the EC2 server.
+The objective of this project is to host a portfolio website on a cloud server and make it accessible through a custom domain with HTTPS security. The project also implements a simple CI/CD pipeline using GitHub Actions so that any update pushed to GitHub is automatically deployed to the AWS EC2 server.
 
-The deployment process includes setting up the EC2 server, installing Nginx, uploading website files, configuring DNS records, and connecting the custom domain to the server.
-
-## Architecture
+Architecture
 
 User Browser  
 → Cloudflare DNS  
 → Domain: kamleshprasad.xyz  
-→ AWS EC2 Public IP: 13.203.154.124  
+→ AWS EC2 Instance (13.203.154.124)  
 → Nginx Web Server  
 → Portfolio Website Files
 
-## Infrastructure Details
+CI/CD Deployment Flow
+
+Developer pushes code to GitHub  
+→ GitHub Actions workflow runs  
+→ GitHub Actions connects to EC2 using SSH  
+→ Latest code is pulled to the server  
+→ Website updates automatically
+
+Infrastructure Details
 
 Cloud Provider: AWS  
 Compute Service: EC2  
@@ -26,209 +32,232 @@ Operating System: Ubuntu Linux
 Web Server: Nginx  
 Domain Provider: GoDaddy  
 DNS Provider: Cloudflare  
+CI/CD Tool: GitHub Actions
 
-Domain Name: kamleshprasad.xyz  
-Public Server IP: 13.203.154.124  
+Domain Name
 
-## EC2 Security Group Configuration
+kamleshprasad.xyz
 
-The following inbound rules were configured in the EC2 security group to allow access to the server.
-
-Port 22 — SSH access  
-Port 80 — HTTP web traffic  
-Port 443 — HTTPS web traffic  
-
-These rules allow remote management and public access to the website.
-
-## Step 1: Purchase Domain
-
-The domain **kamleshprasad.xyz** was purchased from GoDaddy. Initially, GoDaddy was the DNS provider for the domain.
-
-## Step 2: Launch AWS EC2 Instance
-
-An EC2 instance was launched in the **Asia Pacific (Mumbai)** region using **Ubuntu Linux**.
-
-The instance received a public IP address:
+Server Public IP
 
 13.203.154.124
 
-This instance will host the portfolio website.
+EC2 Security Group Configuration
 
-## Step 3: Configure Security Group
+The following inbound rules were configured.
 
-Inbound rules were added to allow:
+Port 22 — SSH access  
+Port 80 — HTTP traffic  
+Port 443 — HTTPS traffic
 
-SSH access on port 22  
-HTTP traffic on port 80  
-HTTPS traffic on port 443  
+Step 1 Purchase Domain
 
-This allows users to access the website and allows SSH access for server management.
+The domain kamleshprasad.xyz was purchased from GoDaddy.
 
-## Step 4: Connect to EC2 Instance
+Step 2 Launch EC2 Instance
 
-The EC2 server was accessed using SSH.
+An EC2 instance was created in the Asia Pacific (Mumbai) region using Ubuntu Linux.
 
+Public IP assigned
+
+13.203.154.124
+
+Step 3 Configure Security Group
+
+Inbound rules were configured to allow SSH, HTTP, and HTTPS traffic.
+
+Step 4 Connect to EC2 Server
 
 ssh ubuntu@13.203.154.124
 
+Step 5 Install Nginx Web Server
 
-## Step 5: Install Nginx Web Server
-
-Update system packages.
-
+Update system packages
 
 sudo apt update
 
-
-Install Nginx.
-
+Install Nginx
 
 sudo apt install nginx -y
 
-
-Start the Nginx service.
-
+Start Nginx
 
 sudo systemctl start nginx
 
-
-Enable Nginx to start automatically on boot.
-
+Enable Nginx at boot
 
 sudo systemctl enable nginx
 
-
-Check service status.
-
+Verify Nginx status
 
 sudo systemctl status nginx
 
+Step 6 Upload Website Files
 
-## Step 6: Upload Website Files
-
-The portfolio website files were placed in the Nginx default web root directory.
-
+Website files are placed inside the Nginx web root directory.
 
 /var/www/html
 
+Example project files
 
-Example website files:
+index.html  
+assets/  
+favicon.ico  
+kamlesh-resume.pdf  
+placeholder.svg  
+robots.txt  
 
+Step 7 Verify Web Server
 
-index.html
-assets/
-favicon.ico
-kamlesh-resume.pdf
-placeholder.svg
-robots.txt
-
-
-Nginx serves these files when users access the website.
-
-## Step 7: Verify Web Server
-
-Check if Nginx is listening on port 80.
-
+Check if Nginx is running
 
 sudo ss -tulpn | grep nginx
 
-
-Open the EC2 public IP in a browser.
-
+Test using the EC2 public IP
 
 http://13.203.154.124
 
+Cloudflare DNS Configuration
 
-If Nginx is configured correctly, the website should load.
+Step 8 Create Cloudflare Account
 
-## Step 8: Create Cloudflare Account
+Add the domain kamleshprasad.xyz to Cloudflare.
 
-A Cloudflare account was created and the domain **kamleshprasad.xyz** was added to Cloudflare so DNS records could be managed.
+Step 9 Update Nameservers in GoDaddy
 
-## Step 9: Update Nameservers in GoDaddy
+Cloudflare provides nameservers.
 
-Cloudflare assigned the following nameservers.
+chloe.ns.cloudflare.com  
+patryk.ns.cloudflare.com  
 
+Update these nameservers in GoDaddy.
 
-chloe.ns.cloudflare.com
-patryk.ns.cloudflare.com
-
-
-These nameservers were updated in GoDaddy so the domain started using Cloudflare DNS.
-
-## Step 10: Configure DNS Records in Cloudflare
-
-DNS records were created to point the domain to the EC2 instance.
+Step 10 Configure DNS Records
 
 A Record
 
-Name
-
+Name  
 kamleshprasad.xyz
 
-
-IP Address
-
+IP Address  
 13.203.154.124
-
 
 CNAME Record
 
-Name
-
+Name  
 www
 
-
-Target
-
+Target  
 kamleshprasad.xyz
 
+This connects the domain to the EC2 instance.
 
-This configuration connects the domain to the EC2 server.
+SSL Configuration
 
-## Cloudflare Proxy Issue
+SSL was configured so the website can be accessed securely using HTTPS.
 
-When the Cloudflare proxy was initially enabled, the website returned **Error 521**.
+Example access
 
-Error 521 means Cloudflare could not establish a connection with the origin server.
+https://kamleshprasad.xyz
 
-## Temporary Fix
+Cloudflare handles SSL encryption between the user and the server.
 
-The proxy was temporarily disabled by switching the DNS record from **Proxied (orange cloud)** to **DNS Only (grey cloud)**.
+Continuous Deployment using GitHub Actions
 
-This allowed the browser to communicate directly with the EC2 server.
+GitHub Actions is used to automatically deploy website updates to the EC2 server whenever changes are pushed to the main branch.
 
-Once disabled, the website became accessible.
+Workflow Process
 
-## Website Access
+Developer pushes code to GitHub  
+GitHub Actions pipeline starts  
+GitHub Actions connects to EC2 using SSH  
+Latest repository code is pulled  
+Website files update automatically
 
-The portfolio website can be accessed using the custom domain.
+GitHub Actions Workflow File
 
+Create the following file in your repository.
 
-http://kamleshprasad.xyz
+.github/workflows/deploy.yml
 
+Workflow Code
 
-## Project Directory Structure
+```yaml
+name: Deploy Portfolio to AWS EC2
 
+on:
+  push:
+    branches:
+      - main
 
-/var/www/html
+jobs:
+  deploy:
+    name: Deploy Website
+    runs-on: ubuntu-latest
 
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Deploy to EC2 via SSH
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            cd /var/www/html
+            git pull origin main
+
+GitHub Secrets Configuration
+
+Add the following secrets in your GitHub repository.
+
+Repository
+Settings
+Secrets and Variables
+Actions
+
+Create these secrets.
+
+EC2_HOST
+
+13.203.154.124
+
+EC2_USER
+
+ubuntu
+
+EC2_SSH_KEY
+
+Paste the full content of your EC2 private key (.pem file).
+
+Example Deployment Command Executed on EC2
+
+cd /var/www/html
+git pull origin main
+
+Whenever a new commit is pushed to GitHub, this command runs automatically through the GitHub Actions workflow.
+
+Repository Structure
+
+portfolio-website-aws
+
+README.md
 index.html
 assets/
-favicon.ico
-kamlesh-resume.pdf
-placeholder.svg
-robots.txt
+.github/
+workflows/
+deploy.yml
 
+Future Improvements
 
-## Future Improvements
+Enable automatic SSL renewal
+Add Docker container deployment
+Add infrastructure automation using Terraform
+Improve CI/CD pipeline with build and testing stages
 
-Enable HTTPS using SSL certificates  
-Enable Cloudflare proxy and caching  
-Add CI/CD pipeline for automated deployment  
-Improve website security and performance
+Author
 
-## Author
-
-Piyush Prasad  
+Piyush Prasad
 DevOps and Cloud Enthusiast
