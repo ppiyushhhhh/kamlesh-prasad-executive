@@ -1,5 +1,5 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
-import { Download, FileText } from "lucide-react";
+import { FileText } from "lucide-react";
 
 interface ResumeModalProps {
   open: boolean;
