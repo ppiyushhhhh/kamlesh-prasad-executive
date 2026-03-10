@@ -17,15 +17,7 @@ const ResumeModal = ({ open, onOpenChange }: ResumeModalProps) => {
             <FileText className="h-5 w-5 text-gold" />
             <DialogTitle className="text-lg font-display">Resume</DialogTitle>
           </div>
-          <DialogDescription className="sr-only">View and download Kamlesh Prasad's resume</DialogDescription>
-          <a
-            href={RESUME_URL}
-            download
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-gold text-primary font-semibold text-sm hover:opacity-90 transition-opacity mr-8"
-          >
-            <Download className="h-4 w-4" />
-            Download
-          </a>
+          <DialogDescription className="sr-only">View Kamlesh Prasad's resume</DialogDescription>
         </DialogHeader>
         <div className="flex-1 min-h-0 h-full">
           <iframe
