@@ -19,29 +19,13 @@ const ResumeModal = ({ open, onOpenChange }: ResumeModalProps) => {
           </div>
           <DialogDescription className="sr-only">View Kamlesh Prasad's resume</DialogDescription>
         </DialogHeader>
-        <div className="flex-1 min-h-0 h-full relative select-none">
+        <div className="flex-1 min-h-0 h-full">
           <iframe
             src={`${RESUME_URL}#toolbar=0`}
             title="Kamlesh Prasad Resume"
             className="w-full h-full border-0"
             style={{ minHeight: "calc(90vh - 73px)" }}
           />
-          {/* Watermark overlay */}
-          <div
-            className="absolute inset-0 pointer-events-none overflow-hidden z-10"
-            aria-hidden="true"
-          >
-            <div className="w-full h-full flex flex-wrap items-center justify-center gap-24 rotate-[-30deg] scale-150 opacity-[0.06]">
-              {Array.from({ length: 30 }).map((_, i) => (
-                <span
-                  key={i}
-                  className="text-foreground text-2xl font-bold whitespace-nowrap select-none"
-                >
-                  KAMLESH PRASAD • CONFIDENTIAL
-                </span>
-              ))}
-            </div>
-          </div>
         </div>
       </DialogContent>
     </Dialog>
