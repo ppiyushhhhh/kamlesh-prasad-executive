@@ -1,263 +1,130 @@
-# Portfolio Website Deployment on AWS EC2 with GoDaddy Domain, Cloudflare DNS, SSL, and GitHub Actions
+# CI/CD Deployment of React Application on AWS EC2 using GitHub Actions
 
-This project demonstrates how to deploy a portfolio website on an AWS EC2 instance using Nginx as the web server. The domain is purchased from GoDaddy and DNS is managed through Cloudflare. SSL is enabled for secure HTTPS access, and GitHub Actions is used to automatically deploy updates to the EC2 server whenever changes are pushed to the repository.
+## Project Overview
 
-Project Overview
+This project demonstrates an end-to-end CI/CD pipeline that automatically builds and deploys a React application to an AWS EC2 server using GitHub Actions and Nginx. The goal of the project is to automate the deployment process so that every code change pushed to GitHub is automatically built and deployed to a live server.
 
-The objective of this project is to host a portfolio website on a cloud server and make it accessible through a custom domain with HTTPS security. The project also implements a simple CI/CD pipeline using GitHub Actions so that any update pushed to GitHub is automatically deployed to the AWS EC2 server.
+## Live Deployment
 
-Architecture
-
-User Browser  
-→ Cloudflare DNS  
-→ Domain: kamleshprasad.xyz  
-→ AWS EC2 Instance (13.203.154.124)  
-→ Nginx Web Server  
-→ Portfolio Website Files
-
-CI/CD Deployment Flow
-
-Developer pushes code to GitHub  
-→ GitHub Actions workflow runs  
-→ GitHub Actions connects to EC2 using SSH  
-→ Latest code is pulled to the server  
-→ Website updates automatically
-
-Infrastructure Details
-
-Cloud Provider: AWS  
-Compute Service: EC2  
-Region: Asia Pacific (Mumbai)  
-Operating System: Ubuntu Linux  
-Web Server: Nginx  
-Domain Provider: GoDaddy  
-DNS Provider: Cloudflare  
-CI/CD Tool: GitHub Actions
-
-Domain Name
-
-kamleshprasad.xyz
-
-Server Public IP
-
-13.203.154.124
-
-EC2 Security Group Configuration
-
-The following inbound rules were configured.
-
-Port 22 — SSH access  
-Port 80 — HTTP traffic  
-Port 443 — HTTPS traffic
-
-Step 1 Purchase Domain
-
-The domain kamleshprasad.xyz was purchased from GoDaddy.
-
-Step 2 Launch EC2 Instance
-
-An EC2 instance was created in the Asia Pacific (Mumbai) region using Ubuntu Linux.
-
-Public IP assigned
-
-13.203.154.124
-
-Step 3 Configure Security Group
-
-Inbound rules were configured to allow SSH, HTTP, and HTTPS traffic.
-
-Step 4 Connect to EC2 Server
-
-ssh ubuntu@13.203.154.124
-
-Step 5 Install Nginx Web Server
-
-Update system packages
-
-sudo apt update
-
-Install Nginx
-
-sudo apt install nginx -y
-
-Start Nginx
-
-sudo systemctl start nginx
-
-Enable Nginx at boot
-
-sudo systemctl enable nginx
-
-Verify Nginx status
-
-sudo systemctl status nginx
-
-Step 6 Upload Website Files
-
-Website files are placed inside the Nginx web root directory.
-
-/var/www/html
-
-Example project files
-
-index.html  
-assets/  
-favicon.ico  
-kamlesh-resume.pdf  
-placeholder.svg  
-robots.txt  
-
-Step 7 Verify Web Server
-
-Check if Nginx is running
-
-sudo ss -tulpn | grep nginx
-
-Test using the EC2 public IP
+The application is currently deployed and accessible at:
 
 http://13.203.154.124
 
-Cloudflare DNS Configuration
+The website is hosted on an AWS EC2 Ubuntu instance and served using the Nginx web server.
 
-Step 8 Create Cloudflare Account
+## Technologies Used
 
-Add the domain kamleshprasad.xyz to Cloudflare.
+Git and GitHub for version control
+GitHub Actions for CI/CD automation
+AWS EC2 (Ubuntu) as the hosting server
+Nginx as the web server
+Node.js and npm for application build process
+React and Vite for frontend development
 
-Step 9 Update Nameservers in GoDaddy
+## Project Architecture
 
-Cloudflare provides nameservers.
+Developer pushes code to GitHub →
+GitHub Actions workflow is triggered →
+Workflow connects to EC2 server via SSH →
+Application is built using npm →
+Build files are deployed to Nginx →
+Website is served live from EC2
 
-chloe.ns.cloudflare.com  
-patryk.ns.cloudflare.com  
+## Server Setup
 
-Update these nameservers in GoDaddy.
+An AWS EC2 Ubuntu instance was created to host the application.
 
-Step 10 Configure DNS Records
+The following setup steps were completed on the server:
 
-A Record
+* Installed Node.js and npm
+* Installed and configured Nginx
+* Cloned the project repository
+* Built the application using npm
+* Deployed the production build to the Nginx web directory
 
-Name  
-kamleshprasad.xyz
+Deployment directory used on the server:
 
-IP Address  
-13.203.154.124
+/var/www/html/
 
-CNAME Record
+Nginx serves the static website from this directory.
 
-Name  
-www
+## Application Build Process
 
-Target  
-kamleshprasad.xyz
+The application uses a production build process to convert source code into optimized static files.
 
-This connects the domain to the EC2 instance.
+Commands used:
 
-SSL Configuration
+npm install
+npm run build
 
-SSL was configured so the website can be accessed securely using HTTPS.
+This process generates a **dist** directory containing optimized HTML, CSS, and JavaScript files which are deployed to the Nginx server.
 
-Example access
+## CI/CD Implementation
 
-https://kamleshprasad.xyz
+A CI/CD pipeline was implemented using GitHub Actions.
 
-Cloudflare handles SSL encryption between the user and the server.
-
-Continuous Deployment using GitHub Actions
-
-GitHub Actions is used to automatically deploy website updates to the EC2 server whenever changes are pushed to the main branch.
-
-Workflow Process
-
-Developer pushes code to GitHub  
-GitHub Actions pipeline starts  
-GitHub Actions connects to EC2 using SSH  
-Latest repository code is pulled  
-Website files update automatically
-
-GitHub Actions Workflow File
-
-Create the following file in your repository.
+Workflow location:
 
 .github/workflows/deploy.yml
 
-Workflow Code
+The pipeline automatically triggers when code is pushed to the **main** branch.
 
-```yaml
-name: Deploy Portfolio to AWS EC2
+Deployment workflow steps:
 
-on:
-  push:
-    branches:
-      - main
+1. GitHub detects a new code push
+2. GitHub Actions starts the deployment workflow
+3. The workflow connects to the EC2 server using SSH
+4. Latest code is pulled from the repository
+5. Project dependencies are installed
+6. The application is built
+7. Old deployment files are removed
+8. New build files are copied to the Nginx directory
+9. Nginx is restarted
 
-jobs:
-  deploy:
-    name: Deploy Website
-    runs-on: ubuntu-latest
+This process ensures that the latest version of the application is always deployed automatically.
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+## Secure Server Authentication
 
-      - name: Deploy to EC2 via SSH
-        uses: appleboy/ssh-action@v1.0.0
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USER }}
-          key: ${{ secrets.EC2_SSH_KEY }}
-          script: |
-            cd /var/www/html
-            git pull origin main
+Secure communication between GitHub Actions and the EC2 server was configured using SSH keys.
 
-GitHub Secrets Configuration
+Steps implemented:
 
-Add the following secrets in your GitHub repository.
+* Generated an SSH key pair
+* Stored the private key in GitHub repository secrets
+* Configured GitHub Actions to use the key for authentication
 
-Repository
-Settings
-Secrets and Variables
-Actions
-
-Create these secrets.
-
-EC2_HOST
-
-13.203.154.124
-
-EC2_USER
-
-ubuntu
+Secret used in GitHub:
 
 EC2_SSH_KEY
 
-Paste the full content of your EC2 private key (.pem file).
+## Automated Deployment Flow
 
-Example Deployment Command Executed on EC2
+1. Developer updates the application code
+2. Code is pushed to GitHub
+3. GitHub Actions pipeline runs automatically
+4. EC2 server pulls the latest code
+5. Application is rebuilt
+6. Updated files are deployed to Nginx
+7. Website is updated on the live server
 
-cd /var/www/html
-git pull origin main
+## Project Outcome
 
-Whenever a new commit is pushed to GitHub, this command runs automatically through the GitHub Actions workflow.
+This project demonstrates a practical DevOps workflow that automates application deployment using CI/CD pipelines. It removes the need for manual server updates and ensures faster and consistent deployments.
 
-Repository Structure
+## Skills Demonstrated
 
-portfolio-website-aws
+Linux server management
+AWS EC2 infrastructure management
+Nginx web server configuration
+Git version control
+CI/CD pipeline creation using GitHub Actions
+SSH authentication and secure server access
+Automated application deployment
 
-README.md
-index.html
-assets/
-.github/
-workflows/
-deploy.yml
+## Future Improvements
 
-Future Improvements
+In future versions of this project, a custom domain will be connected to the website instead of accessing it through the EC2 public IP address. DNS records will be configured and an SSL certificate will be added to enable secure HTTPS access.
 
-Enable automatic SSL renewal
-Add Docker container deployment
-Add infrastructure automation using Terraform
-Improve CI/CD pipeline with build and testing stages
+## Resume Project Description
 
-Author
-
-Piyush Prasad
-DevOps and Cloud Enthusiast
+Implemented a CI/CD pipeline using GitHub Actions to automatically build and deploy a React application to an AWS EC2 instance with Nginx, enabling automated production deployments on every code push.
