@@ -21,7 +21,7 @@ const ResumeModal = ({ open, onOpenChange }: ResumeModalProps) => {
         </DialogHeader>
         <div className="flex-1 min-h-0 h-full">
           <iframe
-            src={RESUME_URL}
+            src={`${RESUME_URL}#toolbar=0`}
             title="Kamlesh Prasad Resume"
             className="w-full h-full border-0"
             style={{ minHeight: "calc(90vh - 73px)" }}
