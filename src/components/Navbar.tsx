@@ -83,17 +83,28 @@ const Navbar = () => {
 
         {/* Desktop */}
         <div className="hidden md:flex items-center gap-8">
-          {links.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              className={`text-sm font-medium transition-colors hover:text-accent ${
-                scrolled ? "text-muted-foreground" : "text-hero-muted"
-              }`}
-            >
-              {l.label}
-            </a>
-          ))}
+          {links.map((l) => {
+            const isActive = activeSection === l.href.replace("#", "");
+            return (
+              <a
+                key={l.href}
+                href={l.href}
+                onClick={(e) => handleClick(e, l.href)}
+                className={`text-sm font-medium transition-all duration-200 relative pb-1 hover:text-accent ${
+                  isActive
+                    ? "text-accent"
+                    : scrolled
+                    ? "text-muted-foreground"
+                    : "text-hero-muted"
+                }`}
+              >
+                {l.label}
+                {isActive && (
+                  <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-accent rounded-full" />
+                )}
+              </a>
+            );
+          })}
           <button
             onClick={() => setDark(!dark)}
             className={`p-2 rounded-md transition-colors ${
