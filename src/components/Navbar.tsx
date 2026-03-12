@@ -15,6 +15,7 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [resumeOpen, setResumeOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
   const [dark, setDark] = useState(() => {
     if (typeof window !== "undefined") {
       return document.documentElement.classList.contains("dark");
@@ -27,6 +28,36 @@ const Navbar = () => {
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    const sectionIds = links.map((l) => l.href.replace("#", ""));
+    const observers: IntersectionObserver[] = [];
+
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setActiveSection(id);
+          }
+        },
+        { rootMargin: "-80px 0px -50% 0px", threshold: 0 }
+      );
+      observer.observe(el);
+      observers.push(observer);
+    });
+
+    return () => observers.forEach((o) => o.disconnect());
+  }, []);
+
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const el = document.getElementById(href.replace("#", ""));
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", dark);
@@ -52,17 +83,28 @@ const Navbar = () => {
 
         {/* Desktop */}
         <div className="hidden md:flex items-center gap-8">
-          {links.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              className={`text-sm font-medium transition-colors hover:text-accent ${
-                scrolled ? "text-muted-foreground" : "text-hero-muted"
-              }`}
-            >
-              {l.label}
-            </a>
-          ))}
+          {links.map((l) => {
+            const isActive = activeSection === l.href.replace("#", "");
+            return (
+              <a
+                key={l.href}
+                href={l.href}
+                onClick={(e) => handleClick(e, l.href)}
+                className={`text-sm font-medium transition-all duration-200 relative pb-1 hover:text-accent ${
+                  isActive
+                    ? "text-accent"
+                    : scrolled
+                    ? "text-muted-foreground"
+                    : "text-hero-muted"
+                }`}
+              >
+                {l.label}
+                {isActive && (
+                  <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-accent rounded-full" />
+                )}
+              </a>
+            );
+          })}
           <button
             onClick={() => setDark(!dark)}
             className={`p-2 rounded-md transition-colors ${
@@ -93,16 +135,21 @@ const Navbar = () => {
       {/* Mobile menu */}
       {mobileOpen && (
         <div className="md:hidden bg-card border-b border-border px-6 py-4 space-y-3">
-          {links.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              onClick={() => setMobileOpen(false)}
-              className="block text-sm font-medium text-muted-foreground hover:text-accent"
-            >
-              {l.label}
-            </a>
-          ))}
+          {links.map((l) => {
+            const isActive = activeSection === l.href.replace("#", "");
+            return (
+              <a
+                key={l.href}
+                href={l.href}
+                onClick={(e) => { handleClick(e, l.href); setMobileOpen(false); }}
+                className={`block text-sm font-medium transition-colors hover:text-accent ${
+                  isActive ? "text-accent border-l-2 border-accent pl-2" : "text-muted-foreground"
+                }`}
+              >
+                {l.label}
+              </a>
+            );
+          })}
           <div className="flex items-center gap-3">
             <button
               onClick={() => setDark(!dark)}
