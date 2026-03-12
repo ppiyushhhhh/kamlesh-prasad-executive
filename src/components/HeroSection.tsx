@@ -77,7 +77,7 @@ const HeroSection = () => {
               {pillars.map((pillar) => (
                 <span
                   key={pillar}
-                  className="px-4 py-1.5 rounded-full text-xs md:text-sm border border-hero-muted/30 text-hero-muted"
+                  className="px-4 py-1.5 rounded-full text-xs md:text-sm border border-hero-muted/30 text-hero-muted transition-all duration-300 hover:border-gold hover:text-gold hover:bg-gold/10 hover:scale-105 cursor-default"
                 >
                   {pillar}
                 </span>
