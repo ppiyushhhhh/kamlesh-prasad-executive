@@ -7,7 +7,7 @@ const ContactSection = () => {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="contact" className="hero-gradient section-padding">
+    <section id="contact" className="hero-gradient section-padding scroll-mt-16">
       <div className="container mx-auto max-w-4xl text-center" ref={ref}>
         <motion.div
           initial={{ opacity: 0, y: 30 }}

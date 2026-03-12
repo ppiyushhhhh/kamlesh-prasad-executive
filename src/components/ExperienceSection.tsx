@@ -163,7 +163,7 @@ const ExperienceSection = () => {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="experience" className="section-padding bg-section-alt">
+    <section id="experience" className="section-padding bg-section-alt scroll-mt-16">
       <div className="container mx-auto max-w-5xl" ref={ref}>
         <motion.div
           initial={{ opacity: 0, y: 30 }}
