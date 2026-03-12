@@ -135,16 +135,21 @@ const Navbar = () => {
       {/* Mobile menu */}
       {mobileOpen && (
         <div className="md:hidden bg-card border-b border-border px-6 py-4 space-y-3">
-          {links.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              onClick={() => setMobileOpen(false)}
-              className="block text-sm font-medium text-muted-foreground hover:text-accent"
-            >
-              {l.label}
-            </a>
-          ))}
+          {links.map((l) => {
+            const isActive = activeSection === l.href.replace("#", "");
+            return (
+              <a
+                key={l.href}
+                href={l.href}
+                onClick={(e) => { handleClick(e, l.href); setMobileOpen(false); }}
+                className={`block text-sm font-medium transition-colors hover:text-accent ${
+                  isActive ? "text-accent border-l-2 border-accent pl-2" : "text-muted-foreground"
+                }`}
+              >
+                {l.label}
+              </a>
+            );
+          })}
           <div className="flex items-center gap-3">
             <button
               onClick={() => setDark(!dark)}
