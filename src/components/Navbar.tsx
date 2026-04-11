@@ -73,14 +73,7 @@ const Navbar = () => {
       }`}
     >
       <div className="container mx-auto px-6 md:px-12 flex items-center justify-between h-16">
-        <a
-          href="#hero"
-          className={`font-display font-bold text-lg transition-colors ${
-            scrolled ? "text-foreground" : "text-hero-foreground"
-          }`}
-        >
-          KP
-        </a>
+        {/* Logo removed */}
 
         {/* Desktop */}
         <div className="hidden md:flex items-center gap-8">
