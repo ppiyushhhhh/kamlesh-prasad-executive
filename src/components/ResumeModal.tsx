@@ -14,7 +14,7 @@ const RESUME_PAGES = [
 const ResumeModal = ({ open, onOpenChange }: ResumeModalProps) => {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="flex h-[90vh] w-[95vw] max-w-5xl flex-col gap-0 p-0">
+      <DialogContent className="flex h-[92dvh] w-[95vw] max-w-5xl flex-col gap-0 overflow-hidden p-0">
         <DialogHeader className="flex flex-row items-center justify-between border-b border-border px-6 py-4 flex-shrink-0">
           <div className="flex items-center gap-2">
             <FileText className="h-5 w-5 text-gold" />
@@ -24,7 +24,7 @@ const ResumeModal = ({ open, onOpenChange }: ResumeModalProps) => {
         </DialogHeader>
 
         <div
-          className="flex-1 min-h-0 overflow-y-auto bg-muted/30 px-3 py-4 md:px-6 md:py-6"
+          className="flex-1 min-h-0 overflow-y-auto overscroll-contain bg-muted/30 px-3 py-4 md:px-6 md:py-6"
           style={{ WebkitOverflowScrolling: "touch" }}
         >
           <div className="mx-auto flex max-w-4xl flex-col gap-4 md:gap-6">
@@ -33,7 +33,8 @@ const ResumeModal = ({ open, onOpenChange }: ResumeModalProps) => {
                 <img
                   src={pageSrc}
                   alt={`Kamlesh Prasad resume page ${index + 1}`}
-                  loading={index === 0 ? "eager" : "lazy"}
+                  loading="eager"
+                  decoding="sync"
                   className="block w-full h-auto"
                 />
               </div>
