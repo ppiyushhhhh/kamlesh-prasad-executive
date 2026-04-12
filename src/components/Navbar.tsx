@@ -73,7 +73,15 @@ const Navbar = () => {
       }`}
     >
       <div className="container mx-auto px-6 md:px-12 flex items-center justify-between h-16">
-        {/* Logo removed */}
+        <a
+          href="#hero"
+          onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+          className={`text-lg font-bold tracking-tight transition-colors ${
+            scrolled ? "text-foreground" : "text-hero-foreground"
+          }`}
+        >
+          Kamlesh Prasad
+        </a>
 
         {/* Desktop */}
         <div className="hidden md:flex items-center gap-8">
