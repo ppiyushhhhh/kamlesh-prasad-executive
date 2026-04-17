@@ -80,7 +80,7 @@ const Navbar = () => {
             scrolled ? "text-foreground" : "text-hero-foreground"
           }`}
         >
-          Kamlesh Prasad
+          KP
         </a>
 
         {/* Desktop */}
